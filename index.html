@@ -1,0 +1,102 @@
+<html>
+<head>
+<script src="pparse/papaparse.min.js"></script>
+<script src="jQuery/jquery.min.js"></script>
+  <link rel="stylesheet" href="formatDiagram.css">
+
+</head>
+
+<body>
+  <script src="display2.js">
+  </script>
+
+<input type="file" id="csvFile" name="files" oninput="handleFileSelect(csvFile)"/>
+<button onclick="wishlist.forEach(generateDiagram)">Generate Diagram</button>
+
+<div>
+  <h1>Process Owner Mapping</h1>
+</div>
+
+<script>
+
+var divMain = document.createElement("div");
+divMain.classList.add('divMain1')
+document.body.appendChild(divMain);
+
+for (i = 0; i < wishlist.length; i++) {
+// // Setting up Table Grid
+// var setTable = document.createElement("table");
+// document.body.appendChild(setTable);
+//
+// if ((i + 3) % 3 == 0 ){
+// var tableNewRow = document.createElement("tr");
+// document.body.appendChild(tableNewRow);
+// }
+
+// var tableRowFill = document.createElement("th");
+// document.body.appendChild(tableRowFill);
+
+function generateDiagram(item) {
+  // create a new div element for the Process Owners
+  var newdiv1 = document.createElement("div");
+  newdiv1.classList.add('divSec')
+  divMain.appendChild(newdiv1);
+
+  var newspan1 = document.createElement("span");
+  newspan1.classList.add('o1')
+  var newdataOwner1 = document.createTextNode(item.dataOwner1);
+  newspan1.appendChild(newdataOwner1);
+  newdiv1.appendChild(newspan1);
+
+  var newspan2 = document.createElement("span");
+  newspan2.classList.add('o2')
+  var newdataOwner2 = document.createTextNode(item.dataOwner2);
+  newspan2.appendChild(newdataOwner2);
+  newdiv1.appendChild(newspan2);
+
+  var newspan3 = document.createElement("span");
+  newspan3.classList.add('o3')
+  var newdataOwner3 = document.createTextNode(item.dataOwner3);
+  newspan3.appendChild(newdataOwner3);
+  newdiv1.appendChild(newspan3);
+  //attach content to div
+
+  //segment for S/N and Item description
+  var newspan4 = document.createElement("span");
+  newspan4.classList.add('o4')
+  // attach content
+  var divText = document.createElement("div");
+  divText.classList.add('textBox')
+
+  var newSN = document.createTextNode(item.SN + ": ");
+  var newdataItem = document.createTextNode(item.dataItem);
+  // add content to div element
+  newspan4.appendChild(newSN);
+  newspan4.appendChild(newdataItem);
+  divText.appendChild(newspan4);
+  //send content to dom
+  newdiv1.appendChild(divText);
+
+  // segment for dataApp
+  if (typeof item.dataApp == "string"){
+  var newspan5 = document.createElement("span");
+  newspan5.classList.add('o5')
+  // attach content
+  var newdataApp = document.createTextNode(item.dataApp);
+  // add content to p elements
+  newspan5.appendChild(newdataApp);
+  //send content to dom
+  newdiv1.appendChild(newspan5);
+  }
+
+  //leaving a space
+  var newspace = document.createElement("br");
+  document.body.appendChild(newspace);
+
+}
+}
+</script>
+
+</body>
+
+</html>
